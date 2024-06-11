@@ -2,44 +2,43 @@
 
 public class CameraRig : MonoBehaviour
 {
-    public Transform objectToFollow;
-    public float speed;
+    [SerializeField] private Transform _objectToFollow;
+    [SerializeField] private float _speed;
 
     private Transform _transform;
-    public Transform Player;
+    [SerializeField] private Transform _target;
 
+    // [SerializeField] private PlayerMove PlayerComponent;
 
-    public PlayerMove PlayerComponent;
+    [SerializeField] private float _koefDistance = 200f;
 
-    public float KoefDistance;
-
-    [SerializeField] private float _maxDist;
-    [SerializeField] private float _minDist;
+    [SerializeField] private float _maxDist = 12f;
+    [SerializeField] private float _minDist = 6f;
 
 
     private void Awake()
     {
         _transform = transform;
-        _transform.position = objectToFollow.position;
+        _transform.position = _objectToFollow.position;
     }
 
     private void FixedUpdate()
     {
-        objectToFollow.LookAt(Player.position);
-        transform.LookAt(Player.position);
+        _objectToFollow.LookAt(_target.position);
+        transform.LookAt(_target.position);
         float mw = Input.GetAxis("Mouse ScrollWheel");
-        if (mw > 0.1 && Vector3.Distance(objectToFollow.transform.position, Player.transform.position) > _minDist)
+        if (mw > 0.1 && Vector3.Distance(_objectToFollow.transform.position, _target.transform.position) > _minDist)
         {
-            objectToFollow.position += transform.forward * Time.deltaTime * KoefDistance;
-            PlayerComponent.MaxDistanceCounter();
+            _objectToFollow.position += transform.forward * Time.deltaTime * _koefDistance;
+            // PlayerComponent.MaxDistanceCounter();
         }
-        else if (mw < -0.1 && Vector3.Distance(objectToFollow.transform.position, Player.transform.position) < _maxDist)
+        else if (mw < -0.1 && Vector3.Distance(_objectToFollow.transform.position, _target.transform.position) < _maxDist)
         {
-            objectToFollow.position -= transform.forward * Time.deltaTime * KoefDistance;
-            PlayerComponent.MaxDistanceCounter();
+            _objectToFollow.position -= transform.forward * Time.deltaTime * _koefDistance;
+            // PlayerComponent.MaxDistanceCounter();
         }
         
-        _transform.position = Vector3.Lerp(_transform.position, objectToFollow.position, Time.fixedDeltaTime * speed);
+        _transform.position = Vector3.Lerp(_transform.position, _objectToFollow.position, Time.fixedDeltaTime * _speed);
     }
 }
 
