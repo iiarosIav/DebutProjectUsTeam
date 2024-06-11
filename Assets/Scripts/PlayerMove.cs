@@ -15,10 +15,10 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float _jumpSpeed;
     
     // private float _maxDistance;
-    
-    private float _xAngle;
 
     private bool _grounded;
+    private GameObject _interactiveObject;
+    private bool _canRotate;
 
     private void Start()
     {
@@ -40,7 +40,7 @@ public class PlayerMove : MonoBehaviour
         Vector3 inputVector = new Vector3(horizontalInput, 0, verticalInput);
         Vector3 worldVelocity = _camera.TransformVector(inputVector) * speed;
 
-        if (inputVector != Vector3.zero)
+        if (inputVector != Vector3.zero && _canRotate)
         {
             _playerModel.rotation = Quaternion.LookRotation(worldVelocity);
             _playerModel.localEulerAngles = new Vector3(0f, _playerModel.localEulerAngles.y, 0f);
@@ -53,6 +53,23 @@ public class PlayerMove : MonoBehaviour
             _rigidbody.velocity += Vector3.up * _jumpSpeed;
         }
 
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (Vector3.Angle(_playerModel.forward, (transform.position - transform.position)) < 60)
+            {
+                if (_interactiveObject != null && _canRotate)
+                {
+                    _interactiveObject.transform.parent = _playerModel.transform;
+                    _canRotate = false;
+                }
+                else if (_interactiveObject != null && !_canRotate)
+                {
+                    _interactiveObject.transform.parent = null;
+                    _canRotate = true;
+                }
+            }
+        }
+
         // CameraObstacleReact();
     }
 
@@ -61,6 +78,11 @@ public class PlayerMove : MonoBehaviour
         if (Vector3.Angle(collision.contacts[0].normal, Vector3.up) < 40f)
         {
             _grounded = true;
+        }
+
+        if (collision.gameObject.GetComponent<InteractiveObject>())
+        {
+            _interactiveObject = collision.gameObject;
         }
     }
 
@@ -72,6 +94,11 @@ public class PlayerMove : MonoBehaviour
     private void OnCollisionExit(Collision collision)
     {
         _grounded = false;
+        
+        if (collision.gameObject.GetComponent<InteractiveObject>())
+        {
+            _interactiveObject = null;
+        }
     }
 
     // private void CameraObstacleReact()
