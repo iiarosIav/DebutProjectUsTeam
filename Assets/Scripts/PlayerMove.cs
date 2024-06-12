@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -15,6 +16,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float _jumpSpeed;
     [SerializeField] private float _grabDistance;
     private InteractiveObject[] _interactiveObjects;
+    public int Level = 1;
     
     // private float _maxDistance;
 
@@ -112,6 +114,15 @@ public class PlayerMove : MonoBehaviour
     private void OnCollisionExit(Collision collision)
     {
         _grounded = false;
+    }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        if (collider.GetComponent<LevelTrigger>() is var levelTrigger)
+        {
+            Level = levelTrigger.Level;
+            GameManager.Instance.LoadLocations();
+        }
     }
 
     // private void CameraObstacleReact()
