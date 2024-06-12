@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     {
         _player = FindObjectOfType<PlayerMove>();
         _locations = FindObjectsOfType<Location>();
+        Array.Sort(_locations);
         LoadLocations();
     }
 

@@ -57,6 +57,7 @@ public class PlayerMove : MonoBehaviour
         
         _rigidbody.velocity = new Vector3(worldVelocity.x, _rigidbody.velocity.y, worldVelocity.z);
 
+        Debug.Log(_grounded);
         if (Input.GetKeyDown(KeyCode.Space) && _grounded)
         {
             _rigidbody.velocity += Vector3.up * _jumpSpeed;
@@ -103,7 +104,7 @@ public class PlayerMove : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         if (Vector3.Angle(collision.contacts[0].normal, Vector3.up) < 40f)
         {
