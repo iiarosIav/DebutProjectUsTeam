@@ -62,7 +62,7 @@ public class PlayerMove : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (Vector3.Angle(_playerModel.forward, (_interactiveObject.transform.position - transform.position)) < 100)
+            if (Vector3.Angle(_playerModel.forward, (_interactiveObject.transform.position - transform.position)) < 60)
             {
                 if (_interactiveObject != null && _canRotate)
                 {
@@ -112,11 +112,6 @@ public class PlayerMove : MonoBehaviour
     private void OnCollisionExit(Collision collision)
     {
         _grounded = false;
-        
-        if (collision.gameObject.GetComponent<InteractiveObject>())
-        {
-            _interactiveObject = null;
-        }
     }
 
     // private void CameraObstacleReact()
