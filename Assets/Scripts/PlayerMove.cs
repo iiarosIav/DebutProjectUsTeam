@@ -15,8 +15,6 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float _jumpSpeed;
     [SerializeField] private float _grabDistance;
     private InteractiveObject[] _interactiveObjects;
-
-
     
     // private float _maxDistance;
 
