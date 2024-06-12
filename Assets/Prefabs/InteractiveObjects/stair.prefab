@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 986802975991972230}
   - component: {fileID: 4256933334581787130}
+  - component: {fileID: 3241363624914275022}
   m_Layer: 0
   m_Name: Button E
   m_TagString: Untagged
@@ -84,6 +85,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3241363624914275022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533238670650728680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 716fa58deffc2cf4fb3d6e93406331e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4980678489012645217
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,8 +190,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1513815721169149625}
   - component: {fileID: 5319835322478718692}
-  - component: {fileID: 5140428923832283931}
   - component: {fileID: 2989868291263750875}
+  - component: {fileID: 5140428923832283931}
   m_Layer: 0
   m_Name: stair
   m_TagString: Untagged
@@ -224,19 +237,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.3, y: 1.8, z: 0.5}
   m_Center: {x: 0.05, y: 0.9, z: 0.05}
---- !u!114 &5140428923832283931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8053485376675530699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c333dddf6149de4a9142c1ebf559b8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _button: {fileID: 0}
 --- !u!54 &2989868291263750875
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -264,3 +264,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!114 &5140428923832283931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8053485376675530699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c333dddf6149de4a9142c1ebf559b8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 3241363624914275022}

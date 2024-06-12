@@ -59,14 +59,12 @@ public class PlayerMove : MonoBehaviour
         {
             _rigidbody.velocity += Vector3.up * _jumpSpeed;
         }
-
         
         if (Input.GetKeyDown(KeyCode.E))
         {
-            CheckDistance();
-            if (Vector3.Angle(_playerModel.forward, (transform.position - transform.position)) < 60)
+            if (Vector3.Angle(_playerModel.forward, (_interactiveObject.transform.position - transform.position)) < 100)
             {
-                if (_interactiveObject != null && _canRotate )
+                if (_interactiveObject != null && _canRotate)
                 {
                     _interactiveObject.transform.parent = _playerModel.transform;
                     _canRotate = false;
@@ -85,20 +83,22 @@ public class PlayerMove : MonoBehaviour
     private void CheckDistance()
     {
         Transform closetObject = FindClosest(_interactiveObjects);
-        if (Vector3.Distance(closetObject.transform.position, transform.position) < _grabDistance && _interactiveObject == null)
+        if (Vector3.Distance(closetObject.transform.position, transform.position) < _grabDistance && _canRotate)
         {
+            if (_interactiveObject != null)
+            {
+                _interactiveObject.GetComponent<InteractiveObject>().Deactivate();
+            }
             _interactiveObject = closetObject.gameObject;
             _interactiveObject.GetComponent<InteractiveObject>().Activate();
+            
         }
-        else if (Vector3.Distance(closetObject.transform.position, transform.position) > _grabDistance && _interactiveObject)
+        else if (Vector3.Distance(closetObject.transform.position, transform.position) > _grabDistance && _interactiveObject != null)
         {
-            _interactiveObject.GetComponent<InteractiveObject>().Activate();
+            _interactiveObject.GetComponent<InteractiveObject>().Deactivate();
             _interactiveObject = null;
-            
         }
-            
-            
-
+        
     }
 
     private void OnCollisionEnter(Collision collision)

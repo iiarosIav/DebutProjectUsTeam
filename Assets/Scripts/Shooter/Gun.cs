@@ -18,6 +18,7 @@ public class Gun : MonoBehaviour
     private Coroutine _moveCoroutine;
 
     private float _timer;
+    private bool _canShoot = true;
 
     // [SerializeField] private Animator _animator;
     // [SerializeField] private AudioSource _shotAudio;
@@ -30,7 +31,7 @@ public class Gun : MonoBehaviour
     void Update()
     {
         _timer += Time.deltaTime;
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0) && _canShoot)
         {
             if (_timer >= _shotPeriod)
             {
@@ -81,7 +82,7 @@ public class Gun : MonoBehaviour
 
     private IEnumerator GoToPos(float firstPos, float secondPos)
     {
-        Debug.Log("Started");
+        _canShoot = false;
         for (float t = 0; t < 1f; t += (Time.deltaTime / 0.3f))
         {
             transform.localPosition = new Vector3(Mathf.Lerp(firstPos, secondPos, t), transform.localPosition.y,
@@ -90,5 +91,6 @@ public class Gun : MonoBehaviour
         }
         transform.localPosition = new Vector3(secondPos, transform.localPosition.y, transform.localPosition.z);
         _moveCoroutine = null;
+        _canShoot = true;
     }
 }

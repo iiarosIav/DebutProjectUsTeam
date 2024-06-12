@@ -732,7 +732,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716fa58deffc2cf4fb3d6e93406331e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _renderer: {fileID: 1393338632}
 --- !u!135 &1393338635
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -754,33 +753,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 2
   m_Center: {x: 0, y: -0.0000019073486, z: 0}
---- !u!1 &1399277709 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3107273114195924271, guid: 4e5a76f17658b154a9b876ce8f7a354d,
-    type: 3}
-  m_PrefabInstance: {fileID: 2413455110146996987}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1399277714
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1399277709}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 2, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1417028454 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7944355759386920863, guid: 7ab94a9c6dfb5394c841a12cfe736f81,
@@ -1045,16 +1017,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gate_1
       objectReference: {fileID: 0}
-    - target: {fileID: 1942882630258530983, guid: a9328b25798a6b244a4e491198f36827,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 122
-      objectReference: {fileID: 0}
-    - target: {fileID: 2250449100020384234, guid: a9328b25798a6b244a4e491198f36827,
-        type: 3}
-      propertyPath: _button
-      value: 
-      objectReference: {fileID: 1393338634}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1068,11 +1030,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 212981163}
     m_Modifications:
-    - target: {fileID: 456670830643002620, guid: 8e6863d1d2b601a438f91a953e5bf381,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 122
-      objectReference: {fileID: 0}
     - target: {fileID: 1951856367183641842, guid: 8e6863d1d2b601a438f91a953e5bf381,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1123,11 +1080,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2831232098855211424, guid: 8e6863d1d2b601a438f91a953e5bf381,
-        type: 3}
-      propertyPath: _button
-      value: 
-      objectReference: {fileID: 1393338634}
     - target: {fileID: 8182853772943685707, guid: 8e6863d1d2b601a438f91a953e5bf381,
         type: 3}
       propertyPath: m_Name
@@ -1229,16 +1181,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 529181252062901310, guid: 9bc6b1402df587b4aa9999ab4420a01d,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 122
-      objectReference: {fileID: 0}
-    - target: {fileID: 6555401810288657743, guid: 9bc6b1402df587b4aa9999ab4420a01d,
-        type: 3}
-      propertyPath: _button
-      value: 
-      objectReference: {fileID: 1393338634}
     - target: {fileID: 8433206662029976034, guid: 9bc6b1402df587b4aa9999ab4420a01d,
         type: 3}
       propertyPath: m_Name
@@ -1307,21 +1249,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3417946268626445731, guid: b234b43371531ce4881536e3ad803508,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 122
-      objectReference: {fileID: 0}
     - target: {fileID: 3800805076341743229, guid: b234b43371531ce4881536e3ad803508,
         type: 3}
       propertyPath: m_Name
       value: Barrel_1
       objectReference: {fileID: 0}
-    - target: {fileID: 8670281359089354894, guid: b234b43371531ce4881536e3ad803508,
-        type: 3}
-      propertyPath: _button
-      value: 
-      objectReference: {fileID: 1393338634}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1441,16 +1373,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5780844491645103556, guid: 28a55b0ab5dc5b04489017b2134494c1,
-        type: 3}
-      propertyPath: _button
-      value: 
-      objectReference: {fileID: 1393338634}
-    - target: {fileID: 8404329080064489566, guid: 28a55b0ab5dc5b04489017b2134494c1,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 122
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1464,31 +1386,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 509746434542272148, guid: 4e5a76f17658b154a9b876ce8f7a354d,
-        type: 3}
-      propertyPath: m_Mass
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 509746434542272148, guid: 4e5a76f17658b154a9b876ce8f7a354d,
-        type: 3}
-      propertyPath: m_Interpolate
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 509746434542272148, guid: 4e5a76f17658b154a9b876ce8f7a354d,
-        type: 3}
-      propertyPath: m_CollisionDetection
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1267028206361670601, guid: 4e5a76f17658b154a9b876ce8f7a354d,
         type: 3}
       propertyPath: _camera
       value: 
       objectReference: {fileID: 1013656478763659930}
-    - target: {fileID: 1267028206361670601, guid: 4e5a76f17658b154a9b876ce8f7a354d,
-        type: 3}
-      propertyPath: _grabDistance
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 1849835932847617349, guid: 4e5a76f17658b154a9b876ce8f7a354d,
         type: 3}
       propertyPath: m_Name
@@ -1544,19 +1446,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7394452129419530265, guid: 4e5a76f17658b154a9b876ce8f7a354d,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3107273114195924271, guid: 4e5a76f17658b154a9b876ce8f7a354d,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1399277714}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e5a76f17658b154a9b876ce8f7a354d, type: 3}
 --- !u!1001 &2650119777402901957
 PrefabInstance:
@@ -1570,11 +1463,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wood
       objectReference: {fileID: 0}
-    - target: {fileID: 5806346618917977297, guid: 2be4b2c7911b4b74799058407fca85b7,
-        type: 3}
-      propertyPath: _button
-      value: 
-      objectReference: {fileID: 1393338634}
     - target: {fileID: 6838152372924412222, guid: 2be4b2c7911b4b74799058407fca85b7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1624,11 +1512,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7446113169974798971, guid: 2be4b2c7911b4b74799058407fca85b7,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1816,16 +1699,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barrel_3
       objectReference: {fileID: 0}
-    - target: {fileID: 4036425879815865846, guid: 79f5b3ffdb464e745a0db67a6aa49007,
-        type: 3}
-      propertyPath: _button
-      value: 
-      objectReference: {fileID: 1393338634}
-    - target: {fileID: 4327320526050209604, guid: 79f5b3ffdb464e745a0db67a6aa49007,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 122
-      objectReference: {fileID: 0}
     - target: {fileID: 6129881772614642590, guid: 79f5b3ffdb464e745a0db67a6aa49007,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1895,11 +1768,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 212981163}
     m_Modifications:
-    - target: {fileID: 2381641444450088475, guid: 1de0584bb9e61144c9a25227d8c1604b,
-        type: 3}
-      propertyPath: _button
-      value: 
-      objectReference: {fileID: 1393338634}
     - target: {fileID: 2460280150817247032, guid: 1de0584bb9e61144c9a25227d8c1604b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1955,11 +1823,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BoxInterActive
       objectReference: {fileID: 0}
-    - target: {fileID: 8441231542642793014, guid: 1de0584bb9e61144c9a25227d8c1604b,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 122
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1991,20 +1854,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 212981163}
     m_Modifications:
-    - target: {fileID: 1252226150198131532, guid: 822c88d71af4be54085699d617ecb6f5,
-        type: 3}
-      propertyPath: _button
-      value: 
-      objectReference: {fileID: 1393338634}
     - target: {fileID: 2069953583943657697, guid: 822c88d71af4be54085699d617ecb6f5,
         type: 3}
       propertyPath: m_Name
       value: Container
-      objectReference: {fileID: 0}
-    - target: {fileID: 6968027046357198026, guid: 822c88d71af4be54085699d617ecb6f5,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 122
       objectReference: {fileID: 0}
     - target: {fileID: 7018593081453445218, guid: 822c88d71af4be54085699d617ecb6f5,
         type: 3}
@@ -2163,16 +2016,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2989868291263750875, guid: 66f3ce17f902d57458fff0aef58b1004,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 122
-      objectReference: {fileID: 0}
-    - target: {fileID: 5140428923832283931, guid: 66f3ce17f902d57458fff0aef58b1004,
-        type: 3}
-      propertyPath: _button
-      value: 
-      objectReference: {fileID: 1393338634}
     - target: {fileID: 8053485376675530699, guid: 66f3ce17f902d57458fff0aef58b1004,
         type: 3}
       propertyPath: m_Name
@@ -2241,21 +2084,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3031661286010444967, guid: 29ac65f288fa2dc468b7206ad6ce797e,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 122
-      objectReference: {fileID: 0}
     - target: {fileID: 5321384221152599187, guid: 29ac65f288fa2dc468b7206ad6ce797e,
         type: 3}
       propertyPath: m_Name
       value: Cone
       objectReference: {fileID: 0}
-    - target: {fileID: 5422554697944859378, guid: 29ac65f288fa2dc468b7206ad6ce797e,
-        type: 3}
-      propertyPath: _button
-      value: 
-      objectReference: {fileID: 1393338634}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

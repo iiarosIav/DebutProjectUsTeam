@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c333dddf6149de4a9142c1ebf559b8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _button: {fileID: 0}
+  _button: {fileID: 6425323693663073463}
 --- !u!1 &1688246489869715329
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,6 +190,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6661555071398105009}
   - component: {fileID: 548649993923902542}
+  - component: {fileID: 6425323693663073463}
   m_Layer: 0
   m_Name: Button E
   m_TagString: Untagged
@@ -264,3 +265,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6425323693663073463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2234716948812640153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 716fa58deffc2cf4fb3d6e93406331e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
