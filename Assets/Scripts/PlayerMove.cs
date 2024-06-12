@@ -13,26 +13,35 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private Transform _cameraTransform;
     [SerializeField] private Transform _camera;
     [SerializeField] private float _jumpSpeed;
+    [SerializeField] private float _grabDistance;
+    private InteractiveObject[] _interactiveObjects;
+
+
     
     // private float _maxDistance;
 
     private bool _grounded;
     private GameObject _interactiveObject;
-    private bool _canRotate;
+    private bool _canRotate = true;
 
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
         Cursor.visible = false;
+        _interactiveObjects = FindObjectsOfType<InteractiveObject>();
         // _maxDistance = (_camera.position - _cameraTransform.position).magnitude;
     }
 
     private void Update()
     {
         float speed = _speed;
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (_canRotate == false)
         {
-            speed *= 2;
+            speed /= 2;
+        }
+        else
+        {
+            CheckDistance();
         }
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
@@ -53,11 +62,13 @@ public class PlayerMove : MonoBehaviour
             _rigidbody.velocity += Vector3.up * _jumpSpeed;
         }
 
+        
         if (Input.GetKeyDown(KeyCode.E))
         {
+            CheckDistance();
             if (Vector3.Angle(_playerModel.forward, (transform.position - transform.position)) < 60)
             {
-                if (_interactiveObject != null && _canRotate)
+                if (_interactiveObject != null && _canRotate )
                 {
                     _interactiveObject.transform.parent = _playerModel.transform;
                     _canRotate = false;
@@ -73,23 +84,32 @@ public class PlayerMove : MonoBehaviour
         // CameraObstacleReact();
     }
 
+    private void CheckDistance()
+    {
+        Transform closetObject = FindClosest(_interactiveObjects);
+        if (Vector3.Distance(closetObject.transform.position, transform.position) < _grabDistance && _interactiveObject == null)
+        {
+            _interactiveObject = closetObject.gameObject;
+            _interactiveObject.GetComponent<InteractiveObject>().Activate();
+        }
+        else if (Vector3.Distance(closetObject.transform.position, transform.position) > _grabDistance && _interactiveObject)
+        {
+            _interactiveObject.GetComponent<InteractiveObject>().Activate();
+            _interactiveObject = null;
+            
+        }
+            
+            
+
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (Vector3.Angle(collision.contacts[0].normal, Vector3.up) < 40f)
         {
             _grounded = true;
         }
-
-        if (collision.gameObject.GetComponent<InteractiveObject>())
-        {
-            _interactiveObject = collision.gameObject;
-        }
     }
-
-    // public void MaxDistanceCounter()
-    // {
-    //     _maxDistance = (_camera.position - _cameraTransform.position).magnitude;
-    // }
 
     private void OnCollisionExit(Collision collision)
     {
@@ -116,4 +136,26 @@ public class PlayerMove : MonoBehaviour
     //         _camera.position -= _camera.forward * .05f;
     //     }
     // }
+
+    private Transform FindClosest(InteractiveObject[] gameObjects)
+    {
+        Vector3 selfPos = transform.position;
+
+        Transform closest = null;
+        float closestDist = float.MaxValue;
+        for (int i = 0; i < gameObjects.Length; i++)
+        {
+            Transform targ = gameObjects[i].transform;
+            Vector3 enemyPos = targ.position;
+            Vector3 sub = enemyPos - selfPos;
+            float distToEnemy = sub.sqrMagnitude;
+            if (distToEnemy < closestDist)
+            {
+                closestDist = distToEnemy;
+                closest = targ;
+            }
+        }
+
+        return closest;
+    }
 }
