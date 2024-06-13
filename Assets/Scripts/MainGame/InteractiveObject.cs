@@ -15,4 +15,14 @@ public class InteractiveObject : MonoBehaviour
     {
         _button.Deactivate();
     }
+
+    public void Kinematic()
+    {
+        GetComponent<Rigidbody>().isKinematic = false;
+    }
+
+    public void UnKinematic()
+    {
+        GetComponent<Rigidbody>().isKinematic = true;
+    }
 }

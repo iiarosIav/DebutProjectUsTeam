@@ -23,6 +23,7 @@ public class PlayerMove : MonoBehaviour
 
     private bool _grounded;
     private GameObject _interactiveObject;
+    private Transform _interactiveObjectParent;
     private bool _canRotate = true;
 
     private void Start()
@@ -58,7 +59,7 @@ public class PlayerMove : MonoBehaviour
         
         _rigidbody.velocity = new Vector3(worldVelocity.x, _rigidbody.velocity.y, worldVelocity.z);
 
-        if (Input.GetKeyDown(KeyCode.Space) && _grounded && _canRotate)
+        if (Input.GetKeyDown(KeyCode.Space) && _grounded)
         {
             _rigidbody.velocity += Vector3.up * _jumpSpeed;
         }
@@ -69,12 +70,15 @@ public class PlayerMove : MonoBehaviour
             {
                 if (_interactiveObject != null && _canRotate)
                 {
+                    _interactiveObjectParent = _interactiveObject.transform.parent;
                     _interactiveObject.transform.parent = _playerModel.transform;
+                    _interactiveObject.GetComponent<InteractiveObject>().UnKinematic();
                     _canRotate = false;
                 }
                 else if (_interactiveObject != null && !_canRotate)
                 {
-                    _interactiveObject.transform.parent = null;
+                    _interactiveObject.transform.parent = _interactiveObjectParent;
+                    _interactiveObject.GetComponent<InteractiveObject>().Kinematic();
                     _canRotate = true;
                 }
             }
@@ -86,6 +90,7 @@ public class PlayerMove : MonoBehaviour
     private void CheckDistance()
     {
         Transform closetObject = FindClosest(_interactiveObjects);
+        if (closetObject == null) return;
         if (Vector3.Distance(closetObject.transform.position, transform.position) < _grabDistance && _canRotate)
         {
             if (_interactiveObject != null)
@@ -126,7 +131,7 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    private void CameraObstacleReact() // Ставить коллайдер стен на 0.01 больше
+    private void CameraObstacleReact() // Ставить коллайдер стен на 0.01 больше Невидимые стены помещать на слой "Player"
     {
         RaycastHit hit;
         LayerMask layerMask = LayerMask.NameToLayer("Player");
