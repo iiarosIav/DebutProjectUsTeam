@@ -12,6 +12,14 @@ public class Gates : LinkedObject
 
     public override void Action()
     {
+        if (_miniGame != null)
+        {
+            _miniGame.SetActive(true);
+            _miniGame = null;
+            GameManager.Instance.LinObject = this;
+            _mainGame.SetActive(false);
+            return;
+        }
         base.Action();
         _posY = transform.position.y;
         StartCoroutine(Opening());
@@ -27,11 +35,5 @@ public class Gates : LinkedObject
         }
 
         transform.position = new Vector3(transform.position.x, _openedPosition.position.y, transform.position.z);
-        
-        if (_miniGame != null)
-        {
-            _miniGame.SetActive(true);
-            _mainGame.SetActive(false);
-        }
     }
 }

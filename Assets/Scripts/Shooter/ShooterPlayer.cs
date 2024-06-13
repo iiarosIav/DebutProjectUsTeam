@@ -77,6 +77,7 @@ public class ShooterPlayer : MonoBehaviour
         if (TargetCoounter >= _winCount)
         {
             _mainGame.SetActive(true);
+            GameManager.Instance.Action();
             _miniGame.SetActive(false);
         }
     }

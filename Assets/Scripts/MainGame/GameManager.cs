@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 
     private Location[] _locations;
     private PlayerMove _player;
+
+    public LinkedObject LinObject;
     
     private void Awake()
     {
@@ -42,6 +44,14 @@ public class GameManager : MonoBehaviour
             if (i == level - 1) _locations[i].gameObject.SetActive(true);
             else if (i == level + 1) _locations[i].gameObject.SetActive(true);
             else _locations[i].gameObject.SetActive(false);
+        }
+    }
+
+    public void Action()
+    {
+        if (LinObject != null)
+        {
+            LinObject.Action();
         }
     }
 }
