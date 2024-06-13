@@ -17,7 +17,7 @@ public class Location : MonoBehaviour, IComparable
         
     }
 
-    public int CompareTo(object? o)
+    public int CompareTo(object o)
     {
         if(o is Location location) return name.CompareTo(location.gameObject.name);
         else throw new ArgumentException("Некорректное значение параметра");

@@ -13,7 +13,10 @@ public class ShooterPlayer : MonoBehaviour
     [SerializeField] private float _mouseSensevity = 7f;
     
     [SerializeField] private int _winCount;
-    [SerializeField] private int _sceneIndex;
+    // [SerializeField] private int _sceneIndex;
+    
+    [SerializeField] private GameObject _mainGame;
+    [SerializeField] private GameObject _miniGame;
 
     private Rigidbody _rigidbody;
 
@@ -73,7 +76,8 @@ public class ShooterPlayer : MonoBehaviour
     {
         if (TargetCoounter >= _winCount)
         {
-            SceneManager.LoadScene(_sceneIndex);
+            _mainGame.SetActive(true);
+            _miniGame.SetActive(false);
         }
     }
 

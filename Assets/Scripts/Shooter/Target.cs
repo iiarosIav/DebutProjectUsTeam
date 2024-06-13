@@ -14,18 +14,18 @@ public class Target : MonoBehaviour
     private void Start()
     {
         _player = FindObjectOfType<ShooterPlayer>();
-        StartCoroutine(GoToPos(transform.position.x, _xPos2));
+        StartCoroutine(GoToPos(transform.localPosition.x, _xPos2));
     }
 
     private IEnumerator GoToPos(float firstPos, float secondPos)
     {
         for (float t = 0; t < 1f; t += (Time.deltaTime / _time))
         {
-            transform.position = new Vector3(Mathf.Lerp(firstPos, secondPos, t), transform.position.y,
-                transform.position.z);
+            transform.localPosition = new Vector3(Mathf.Lerp(firstPos, secondPos, t), transform.localPosition.y,
+                transform.localPosition.z);
             yield return null;
         }
-        transform.position = new Vector3(secondPos, transform.position.y, transform.position.z);
+        transform.localPosition = new Vector3(secondPos, transform.localPosition.y, transform.localPosition.z);
         StartCoroutine(GoToPos(secondPos, firstPos));
 
     }

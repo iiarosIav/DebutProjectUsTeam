@@ -5,6 +5,8 @@ using UnityEngine;
 public class Gates : LinkedObject
 {
     [SerializeField] private Transform _openedPosition;
+    [SerializeField] private GameObject _mainGame;
+    [SerializeField] private GameObject _miniGame;
 
     private float _posY;
 
@@ -25,5 +27,11 @@ public class Gates : LinkedObject
         }
 
         transform.position = new Vector3(transform.position.x, _openedPosition.position.y, transform.position.z);
+        
+        if (_miniGame != null)
+        {
+            _miniGame.SetActive(true);
+            _mainGame.SetActive(false);
+        }
     }
 }
