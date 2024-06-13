@@ -13,15 +13,17 @@ public class PlayerMove : MonoBehaviour
     // [SerializeField] private float _mouseSencetivity = 1f;
     [SerializeField] private Transform _cameraTransform;
     [SerializeField] private Transform _camera;
+    [SerializeField] private Transform _objectToFollow;
     [SerializeField] private float _jumpSpeed;
     [SerializeField] private float _grabDistance;
     private InteractiveObject[] _interactiveObjects;
     public int Level = 1;
     
-    // private float _maxDistance;
+    private float _maxDistance;
 
     private bool _grounded;
     private GameObject _interactiveObject;
+    private Transform _interactiveObjectParent;
     private bool _canRotate = true;
 
     private void Start()
@@ -29,7 +31,7 @@ public class PlayerMove : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         Cursor.visible = false;
         _interactiveObjects = FindObjectsOfType<InteractiveObject>();
-        // _maxDistance = (_camera.position - _cameraTransform.position).magnitude;
+        _maxDistance = (_objectToFollow.position - _cameraTransform.position).magnitude;
     }
 
     private void Update()
@@ -68,23 +70,27 @@ public class PlayerMove : MonoBehaviour
             {
                 if (_interactiveObject != null && _canRotate)
                 {
+                    _interactiveObjectParent = _interactiveObject.transform.parent;
                     _interactiveObject.transform.parent = _playerModel.transform;
+                    _interactiveObject.GetComponent<InteractiveObject>().UnKinematic();
                     _canRotate = false;
                 }
                 else if (_interactiveObject != null && !_canRotate)
                 {
-                    _interactiveObject.transform.parent = null;
+                    _interactiveObject.transform.parent = _interactiveObjectParent;
+                    _interactiveObject.GetComponent<InteractiveObject>().Kinematic();
                     _canRotate = true;
                 }
             }
         }
 
-        // CameraObstacleReact();
+        CameraObstacleReact();
     }
 
     private void CheckDistance()
     {
         Transform closetObject = FindClosest(_interactiveObjects);
+        if (closetObject == null) return;
         if (Vector3.Distance(closetObject.transform.position, transform.position) < _grabDistance && _canRotate)
         {
             if (_interactiveObject != null)
@@ -125,21 +131,27 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    // private void CameraObstacleReact()
-    // {
-    //     RaycastHit hit;
-    //     LayerMask layerMask = LayerMask.NameToLayer("Player");
-    //     float distance = Vector3.Distance(_camera.position, _playerModel.position);
-    //     if (Physics.Raycast(_cameraTransform.position, _camera.position - _cameraTransform.position, out hit,
-    //             _maxDistance, layerMask))
-    //     {
-    //         _camera.position = hit.point;
-    //     }
-    //     else if (distance < _maxDistance && !Physics.Raycast(_camera.position,-_camera.forward, .1f, layerMask))
-    //     {
-    //         _camera.position -= _camera.forward * .05f;
-    //     }
-    // }
+    private void CameraObstacleReact() // Ставить коллайдер стен на 0.01 больше Невидимые стены помещать на слой "Player"
+    {
+        RaycastHit hit;
+        LayerMask layerMask = LayerMask.NameToLayer("Player");
+        float distance = Vector3.Distance(_objectToFollow.position, _playerModel.position);
+        if (Physics.Raycast(_cameraTransform.position, _objectToFollow.position - _cameraTransform.position, out hit,
+                _maxDistance, layerMask))
+        {
+            _objectToFollow.position = hit.point;
+            _camera.position = _objectToFollow.position;
+        }
+        else if (distance < _maxDistance && !Physics.Raycast(_objectToFollow.position,-_objectToFollow.forward, .1f, layerMask))
+        {
+            _objectToFollow.position -= _objectToFollow.forward * .05f;
+        }
+    }
+
+    public void MaxDistanceCounter(float distance)
+    {
+        _maxDistance = distance;
+    }
 
     private Transform FindClosest(InteractiveObject[] gameObjects)
     {

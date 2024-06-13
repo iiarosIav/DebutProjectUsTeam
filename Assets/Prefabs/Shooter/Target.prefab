@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 282836737157015812}
   - component: {fileID: 91792834275623220}
   - component: {fileID: 5391163364193810003}
+  - component: {fileID: 7648709097549398009}
   - component: {fileID: 1243065574631458800}
   m_Layer: 0
   m_Name: Target
@@ -220,8 +221,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1.2985501}
-  m_Center: {x: 0, y: 0, z: -0.22361936}
+  m_Size: {x: 1, y: 0.61123395, z: 1.2985501}
+  m_Center: {x: 0, y: -0.19438307, z: -0.22361936}
+--- !u!65 &7648709097549398009
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6686732518530939721}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.606844, y: 0.37664214, z: 1.7897892}
+  m_Center: {x: -0.020062864, y: 0.31167898, z: -0.24068822}
 --- !u!114 &1243065574631458800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,3 +256,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae5157ed4b1202e49b6d209275dc7bcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _xPos1: 8
+  _xPos2: -8
+  _time: 2

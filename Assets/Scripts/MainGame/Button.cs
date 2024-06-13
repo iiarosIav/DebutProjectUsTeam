@@ -7,7 +7,7 @@ public class Button : MonoBehaviour
 {
     [SerializeField] private LinkedObject _linkedObject;
 
-    private bool _isPressed;
+    [SerializeField] private bool _isPressed;
 
     private void Action()
     {

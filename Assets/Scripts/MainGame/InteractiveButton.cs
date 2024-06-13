@@ -12,7 +12,6 @@ public class InteractiveButton : MonoBehaviour
     {
         _renderer = GetComponent<SpriteRenderer>();
         _camera = FindObjectOfType<Camera>().GetComponent<Transform>();
-        Deactivate();
     }
 
     private void Update()

@@ -10,6 +10,8 @@ public class Target : MonoBehaviour
     [SerializeField] private float _xPos2;
     [SerializeField] private float _time;
     private ShooterPlayer _player;
+
+    private int _health = 2;
     
     private void Start()
     {
@@ -34,9 +36,26 @@ public class Target : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Bullet>())
         {
-            _player.TargetCoounter += 1;
-            _player.TargetCheck();
-            Destroy(gameObject);
+            _health--;
+            if (_health <= 0)
+            {
+                Die();
+            }
         }
+    }
+    
+    private void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.GetComponent<Bullet>())
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        _player.TargetCoounter += 1;
+        _player.TargetCheck();
+        Destroy(gameObject);
     }
 }
