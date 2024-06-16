@@ -22,6 +22,7 @@ public class PlayerMove : MonoBehaviour
     private float _maxDistance;
 
     private bool _grounded;
+    private bool _groundedForIO;
     private GameObject _interactiveObject;
     private Transform _interactiveObjectParent;
     private bool _canRotate = true;
@@ -68,17 +69,15 @@ public class PlayerMove : MonoBehaviour
         {
             if (Vector3.Angle(_playerModel.forward, (_interactiveObject.transform.position - transform.position)) < 60)
             {
-                if (_interactiveObject != null && _canRotate)
+                if (_interactiveObject != null && _canRotate && _groundedForIO)
                 {
                     _interactiveObjectParent = _interactiveObject.transform.parent;
                     _interactiveObject.transform.parent = _playerModel.transform;
-                    _interactiveObject.GetComponent<InteractiveObject>().UnKinematic();
                     _canRotate = false;
                 }
-                else if (_interactiveObject != null && !_canRotate)
+                else if (_interactiveObject != null && !_canRotate && _groundedForIO)
                 {
                     _interactiveObject.transform.parent = _interactiveObjectParent;
-                    _interactiveObject.GetComponent<InteractiveObject>().Kinematic();
                     _canRotate = true;
                 }
             }
@@ -114,12 +113,17 @@ public class PlayerMove : MonoBehaviour
         if (Vector3.Angle(collision.contacts[0].normal, Vector3.up) < 40f)
         {
             _grounded = true;
+            if (!collision.gameObject.GetComponent<InteractiveObject>())
+            {
+                _groundedForIO = true;
+            }
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
         _grounded = false;
+        _groundedForIO = false;
     }
 
     private void OnTriggerEnter(Collider collider)
