@@ -10,16 +10,18 @@ public class spawner : MonoBehaviour
     [SerializeField] private float _shootingDelay = 6f;
 
     private float _currentShootingDelayCount = 0f;
-        
+
+    int col = 20;
         
 
     void Update()
     {
         _currentShootingDelayCount += Time.deltaTime;
         
-        if (_currentShootingDelayCount > _shootingDelay)
+        if (_currentShootingDelayCount > _shootingDelay && col > 0)
         {
             TryS();
+            
         }
         
     }
@@ -38,5 +40,6 @@ public class spawner : MonoBehaviour
             Instantiate(Pref3, transform.position, transform.rotation);
         }
         _currentShootingDelayCount = 0;
+        col--;
     }
 }
