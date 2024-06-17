@@ -15,8 +15,11 @@ public class EnemyPlaneAI : MonoBehaviour
 
     private bool _canShoot = true;
     private float _timer;
+
+    Counter counter;
     void Start()
     {
+        counter = FindObjectOfType<Counter>();
         Invoke("Destr", 10f);
     }
 
@@ -42,6 +45,7 @@ public class EnemyPlaneAI : MonoBehaviour
             _smoke.SetActive(true);
             _canShoot = false;
             _speed *= 2;
+            counter.CheckWin();
             Destroy(collision.gameObject);
         }
     }

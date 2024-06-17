@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,6 +25,8 @@ public class ShooterPlayer : MonoBehaviour
     // private bool _grounded;
     
     public int TargetCoounter;
+
+    public TextMeshProUGUI TarText;
 
     void Start()
     {
@@ -74,8 +77,10 @@ public class ShooterPlayer : MonoBehaviour
 
     public void TargetCheck()
     {
+        TarText.text = (_winCount - TargetCoounter).ToString();
         if (TargetCoounter >= _winCount)
         {
+            UnityEngine.Cursor.visible = true;
             _mainGame.SetActive(true);
             GameManager.Instance.Action();
             _miniGame.SetActive(false);

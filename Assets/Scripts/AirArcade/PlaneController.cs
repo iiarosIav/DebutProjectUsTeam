@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlaneController : MonoBehaviour
@@ -17,6 +18,10 @@ public class PlaneController : MonoBehaviour
     [SerializeField] private Transform _bulletSpawn;
     [SerializeField] private float _bulletSpeed = 20f;
     [SerializeField] private float _shotPeriod = 0.2f;
+
+    [SerializeField] private int _heal = 5;
+    public GameObject LoseScreen;
+    public TextMeshProUGUI HealText;
 
     private float _timer;
 
@@ -36,6 +41,13 @@ public class PlaneController : MonoBehaviour
                 _timer = 0;
             }
         }
+
+        if (_heal <= 0)
+        {
+            Instantiate(_fX, transform.position + new Vector3(0, 0.2f, 0), transform.rotation);
+            LoseScreen.SetActive(true);
+            Destroy(gameObject);
+        }
     }
 
     private void Fire()
@@ -43,6 +55,23 @@ public class PlaneController : MonoBehaviour
         Bullet newBullet = Instantiate(_bullet, _bulletSpawn.position, _bulletSpawn.rotation);
         newBullet.GetComponent<Rigidbody>().velocity = _bulletSpawn.forward * _bulletSpeed;
         Instantiate(_fX, _bulletSpawn.transform.position + new Vector3(0, 0.2f, 0), transform.rotation);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name.Contains("Enemy"))
+        {
+            Instantiate(_fX, collision.gameObject.transform.position + new Vector3(0, 0.2f, 0), transform.rotation);
+            _heal--;
+            HealText.text = _heal.ToString();
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.name.Contains("Laser"))
+        {
+            Instantiate(_fX, collision.gameObject.transform.position + new Vector3(0, 0.2f, 0), transform.rotation);
+            _heal--;
+            HealText.text = _heal.ToString();
+        }
     }
 
 }

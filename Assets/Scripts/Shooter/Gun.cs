@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Timers;
+using TMPro;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class Gun : MonoBehaviour
 {
@@ -14,6 +16,9 @@ public class Gun : MonoBehaviour
     [SerializeField] private float _bulletSpeed = 20f;
     [SerializeField] private float _shotPeriod = 0.2f;
     [SerializeField] private Transform _camera;
+    [SerializeField] private int _ammo = 25;
+
+    public GameObject LoseScreen;
 
     private float _posX;
     private Coroutine _moveCoroutine;
@@ -21,8 +26,10 @@ public class Gun : MonoBehaviour
     private float _timer;
     private bool _canShoot = true;
 
+
     // [SerializeField] private Animator _animator;
     // [SerializeField] private AudioSource _shotAudio;
+    public TextMeshProUGUI BulText;
 
     private void Start()
     {
@@ -74,12 +81,18 @@ public class Gun : MonoBehaviour
 
     private void Fire()
     {
+        if (_ammo <= 0)
+        {
+            LoseScreen.SetActive(true);
+            UnityEngine.Cursor.visible = true;
+            return;
+        }
         Bullet newBullet = Instantiate(_bullet, _bulletSpawn.position, _bulletSpawn.rotation);
         newBullet.GetComponent<Rigidbody>().velocity = _bulletSpawn.forward * _bulletSpeed;
         Instantiate(_fX, _bulletSpawn.transform.position + new Vector3(0, 0.2f, 0), transform.rotation);
         StartCoroutine(Shoot(0.933f, 0.59f, 0f, -10f));
-
-
+        _ammo--;
+        BulText.text = _ammo.ToString();
         // _animator.SetTrigger("Shot");
         // _shotAudio.Play();
     }
