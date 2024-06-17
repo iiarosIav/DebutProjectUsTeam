@@ -7,6 +7,7 @@ using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
 
 public class Gun : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private float _bulletSpeed = 20f;
     [SerializeField] private float _shotPeriod = 0.2f;
     [SerializeField] private Transform _camera;
-    [SerializeField] private int _ammo = 25;
+    [SerializeField] private int _ammo = 50;
 
     public GameObject LoseScreen;
 
@@ -31,6 +32,8 @@ public class Gun : MonoBehaviour
     // [SerializeField] private AudioSource _shotAudio;
     public TextMeshProUGUI BulText;
 
+    [SerializeField] private ShooterPlayer _player;
+
     private void Start()
     {
         _posX = transform.localPosition.x;
@@ -38,6 +41,7 @@ public class Gun : MonoBehaviour
 
     private void Update()
     {
+        if (_player.IsWin) return;
         _timer += Time.deltaTime;
         if (Input.GetKey(KeyCode.Mouse0) && _canShoot)
         {
@@ -59,7 +63,7 @@ public class Gun : MonoBehaviour
             {
                 _moveCoroutine = StartCoroutine(GoToPos(_posX, 0));
             }
-            
+
             // transform.position = new Vector3(_camera.position.x, transform.position.y, transform.position.z);
         }
 
@@ -74,27 +78,50 @@ public class Gun : MonoBehaviour
             {
                 _moveCoroutine = StartCoroutine(GoToPos(0, _posX));
             }
-            
+
             // transform.position = new Vector3(_posX, transform.position.y, transform.position.z);
         }
     }
 
     private void Fire()
     {
-        if (_ammo <= 0)
-        {
-            LoseScreen.SetActive(true);
-            UnityEngine.Cursor.visible = true;
-            return;
-        }
+        if (_player.IsWin) return;
+        _ammo--;
+
         Bullet newBullet = Instantiate(_bullet, _bulletSpawn.position, _bulletSpawn.rotation);
         newBullet.GetComponent<Rigidbody>().velocity = _bulletSpawn.forward * _bulletSpeed;
         Instantiate(_fX, _bulletSpawn.transform.position + new Vector3(0, 0.2f, 0), transform.rotation);
         StartCoroutine(Shoot(0.933f, 0.59f, 0f, -10f));
-        _ammo--;
+        
         BulText.text = _ammo.ToString();
+        
+        if (_ammo <= 0)
+        {
+            StartCoroutine(LoseCountDown());
+            return;
+        }
+        
+        
         // _animator.SetTrigger("Shot");
         // _shotAudio.Play();
+    }
+
+    public void Restart()
+    {
+        _ammo = 50;
+        BulText.text = _ammo.ToString();
+    }
+
+    private IEnumerator LoseCountDown()
+    {
+        yield return new WaitForSeconds(0.5f);
+        if (!_player.IsWin)
+        {
+            _player.IsWin = true;
+            LoseScreen.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 
     private IEnumerator GoToPos(float firstPos, float secondPos)
@@ -106,10 +133,12 @@ public class Gun : MonoBehaviour
                 transform.localPosition.z);
             yield return null;
         }
+
         transform.localPosition = new Vector3(secondPos, transform.localPosition.y, transform.localPosition.z);
         _moveCoroutine = null;
         _canShoot = true;
     }
+
     private IEnumerator Shoot(float firstPos, float secondPos, float firstAngle, float secondAngle)
     {
         _canShoot = false;
@@ -117,21 +146,24 @@ public class Gun : MonoBehaviour
         {
             transform.localPosition = new Vector3(transform.localPosition.x,
                 transform.localPosition.y, Mathf.Lerp(firstPos, secondPos, t));
-            transform.localEulerAngles = new Vector3(Mathf.Lerp(firstAngle, secondAngle, t), transform.localRotation.y, transform.localRotation.z);
+            transform.localEulerAngles = new Vector3(Mathf.Lerp(firstAngle, secondAngle, t), transform.localRotation.y,
+                transform.localRotation.z);
             yield return null;
         }
+
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, secondPos);
         transform.localEulerAngles = new Vector3(secondAngle, transform.localRotation.y, transform.localRotation.z);
         for (float t = 0; t < 1f; t += (Time.deltaTime / 0.43f))
         {
             transform.localPosition = new Vector3(transform.localPosition.x,
                 transform.localPosition.y, Mathf.Lerp(secondPos, firstPos, t));
-            transform.localEulerAngles = new Vector3(Mathf.Lerp(secondAngle, firstAngle, t), transform.localRotation.y, transform.localRotation.z);
+            transform.localEulerAngles = new Vector3(Mathf.Lerp(secondAngle, firstAngle, t), transform.localRotation.y,
+                transform.localRotation.z);
             yield return null;
         }
+
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, firstPos);
         transform.localEulerAngles = new Vector3(firstAngle, transform.localRotation.y, transform.localRotation.z);
         _canShoot = true;
-        
     }
 }

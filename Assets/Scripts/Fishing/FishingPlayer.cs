@@ -30,6 +30,11 @@ public class FishingPlayer : MonoBehaviour
     [SerializeField] private Slider _slider;
 
     private Coroutine _fishigCoroutine;
+    
+    [SerializeField] private GameObject _mainGame;
+    [SerializeField] private GameObject _miniGame;
+    
+    [SerializeField] private GameObject _winWindow;
 
     private void Start()
     {
@@ -47,7 +52,7 @@ public class FishingPlayer : MonoBehaviour
 
         if (_fishigCoroutine == null && Input.GetKeyDown(KeyCode.E))
         {
-            StartCoroutine(StartingProcess(_startRot, _endRot));
+            _fishigCoroutine = StartCoroutine(StartingProcess(_startRot, _endRot));
         }
     }
 
@@ -175,7 +180,20 @@ public class FishingPlayer : MonoBehaviour
         _winCountText.text = Convert.ToString(_winCount);
         if (_winCount <= 0)
         {
-            SceneManager.LoadScene(0);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            _winWindow.SetActive(true);
+            Time.timeScale = 0f;
         }
+    }
+    
+    public void LoadMainGame()
+    {
+        Time.timeScale = 1f;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        _mainGame.SetActive(true);
+        GameManager.Instance.Action();
+        _miniGame.SetActive(false);
     }
 }

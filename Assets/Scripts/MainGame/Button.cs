@@ -9,7 +9,7 @@ public class Button : MonoBehaviour
 
     [SerializeField] private bool _isPressed;
 
-    private void Action()
+    public void Action()
     {
         // Проигрываем анимации нажатия
         _linkedObject.Action();

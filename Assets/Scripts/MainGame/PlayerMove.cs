@@ -31,6 +31,7 @@ public class PlayerMove : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         _interactiveObjects = FindObjectsOfType<InteractiveObject>();
         _maxDistance = (_objectToFollow.position - _cameraTransform.position).magnitude;
     }
@@ -84,6 +85,13 @@ public class PlayerMove : MonoBehaviour
         }
 
         CameraObstacleReact();
+    }
+
+    public void ClearStates()
+    {
+        _canRotate = true;
+        _interactiveObject.GetComponent<InteractiveObject>().Deactivate();
+        _interactiveObject = null;
     }
 
     private void CheckDistance()

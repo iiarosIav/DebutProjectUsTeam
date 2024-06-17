@@ -18,11 +18,17 @@ public class ShooterPlayer : MonoBehaviour
     
     [SerializeField] private GameObject _mainGame;
     [SerializeField] private GameObject _miniGame;
+    [SerializeField] private GameObject _miniGamePrefab;
+    [SerializeField] private Transform _miniGamePosition;
+    
+    [SerializeField] private GameObject _winWindow;
+    
+    [SerializeField] private Gun _gun;
 
     private Rigidbody _rigidbody;
 
     private float _xAngle;
-    // private bool _grounded;
+    public bool IsWin;
     
     public int TargetCoounter;
 
@@ -37,6 +43,7 @@ public class ShooterPlayer : MonoBehaviour
 
     void Update()
     {
+        if (IsWin) return;
         if (Input.GetKeyDown(KeyCode.C))
         {
             Cursor.visible = false;
@@ -80,11 +87,34 @@ public class ShooterPlayer : MonoBehaviour
         TarText.text = (_winCount - TargetCoounter).ToString();
         if (TargetCoounter >= _winCount)
         {
-            UnityEngine.Cursor.visible = true;
-            _mainGame.SetActive(true);
-            GameManager.Instance.Action();
-            _miniGame.SetActive(false);
+            IsWin = true;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            _winWindow.SetActive(true);
         }
+    }
+    
+    public void Restart()
+    {
+        IsWin = false;
+        _gun.Restart();
+        TargetCoounter = 0;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        TarText.text = _winCount.ToString();
+        var miniGamePosition = Instantiate(_miniGamePrefab, _miniGamePosition.position, _miniGamePosition.rotation).transform;
+        miniGamePosition.SetParent(_miniGame.transform);
+        Destroy(_miniGamePosition.gameObject);
+        _miniGamePosition = miniGamePosition;
+    }
+
+    public void LoadMainGame()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        _mainGame.SetActive(true);
+        GameManager.Instance.Action();
+        _miniGame.SetActive(false);
     }
 
     // private void OnCollisionStay(Collision collision)

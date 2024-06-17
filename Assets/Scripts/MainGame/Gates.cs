@@ -4,22 +4,10 @@ using UnityEngine;
 
 public class Gates : LinkedObject
 {
-    [SerializeField] private Transform _openedPosition;
-    [SerializeField] private GameObject _mainGame;
-    [SerializeField] private GameObject _miniGame;
-
     private float _posY;
 
     public override void Action()
     {
-        if (_miniGame != null)
-        {
-            _miniGame.SetActive(true);
-            _miniGame = null;
-            GameManager.Instance.LinObject = this;
-            _mainGame.SetActive(false);
-            return;
-        }
         base.Action();
         _posY = transform.position.y;
         StartCoroutine(Opening());
