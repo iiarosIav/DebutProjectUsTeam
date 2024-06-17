@@ -66,7 +66,7 @@ public class PlaneController : MonoBehaviour
             HealText.text = _heal.ToString();
             Destroy(collision.gameObject);
         }
-        if (collision.gameObject.name.Contains("Laser"))
+        if (collision.gameObject.name.Contains("laser") || collision.gameObject.name.Contains("Boss"))
         {
             Instantiate(_fX, collision.gameObject.transform.position + new Vector3(0, 0.2f, 0), transform.rotation);
             _heal--;

@@ -127,7 +127,7 @@ Material:
     - _RimColor: {r: 0.7794118, g: 0.8722109, b: 1, a: 0}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &5658080046406745327
+--- !u!114 &4349451063560935779
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
