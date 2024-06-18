@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class spawner : MonoBehaviour
+public class Spawner : MonoBehaviour
 {
     public GameObject Pref1;
     public GameObject Pref2;
@@ -29,15 +29,15 @@ public class spawner : MonoBehaviour
     {  
         int value = Random.Range(0,300);
         if (value <= 100) {
-            Instantiate(Pref1, transform.position, transform.rotation);
+            Instantiate(Pref1, transform.position, transform.rotation).transform.SetParent(transform.parent);
         }
         else if (value > 200)
         {
-            Instantiate(Pref2, transform.position, transform.rotation);
+            Instantiate(Pref2, transform.position, transform.rotation).transform.SetParent(transform.parent);
         }
         else
         {
-            Instantiate(Pref3, transform.position, transform.rotation);
+            Instantiate(Pref3, transform.position, transform.rotation).transform.SetParent(transform.parent);
         }
         _currentShootingDelayCount = 0;
         col--;

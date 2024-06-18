@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class BossAI : MonoBehaviour
 {
@@ -60,27 +59,24 @@ public class BossAI : MonoBehaviour
         {
             transform.position += transform.up * -1 * Time.deltaTime * _speed;
             transform.Rotate(0, _angleSpeed * Time.deltaTime, 0);
-            
+
             isDead = true;
-            if (!isDead)
-            {
-                counter.CheckWin();
-
-            }
+            counter.Win();
+            // if (!isDead)
+            // {
+            //     counter.CheckWin();
+            // }
         }
-        
-
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-            if (collision.gameObject.name.Contains("Bullet"))
-            {
-                Instantiate(_fX, transform.position, transform.rotation);
-                
-                Destroy(collision.gameObject);
-                _heal--;
-            }
-  
+        if (collision.gameObject.name.Contains("Bullet"))
+        {
+            Instantiate(_fX, transform.position, transform.rotation);
+
+            Destroy(collision.gameObject);
+            _heal--;
+        }
     }
 }

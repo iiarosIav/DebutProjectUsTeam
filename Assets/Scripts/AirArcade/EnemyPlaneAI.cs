@@ -17,6 +17,7 @@ public class EnemyPlaneAI : MonoBehaviour
     private float _timer;
 
     Counter counter;
+
     void Start()
     {
         counter = FindObjectOfType<Counter>();
@@ -36,18 +37,25 @@ public class EnemyPlaneAI : MonoBehaviour
             _timer = 0;
         }
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name.Contains("Bullet"))
         {
-            Instantiate(_fX, transform.position, transform.rotation);
-            transform.Rotate(UnityEngine.Random.Range(-20f, 20f), UnityEngine.Random.Range(-45f, 45f), UnityEngine.Random.Range(-80f, 80f));
-            _smoke.SetActive(true);
-            _canShoot = false;
-            _speed *= 2;
-            counter.CheckWin();
+            Die();
             Destroy(collision.gameObject);
         }
+    }
+
+    public void Die()
+    {
+        Instantiate(_fX, transform.position, transform.rotation);
+        transform.Rotate(UnityEngine.Random.Range(-20f, 20f), UnityEngine.Random.Range(-45f, 45f),
+            UnityEngine.Random.Range(-80f, 80f));
+        _smoke.SetActive(true);
+        _canShoot = false;
+        _speed *= 2;
+        counter.CheckWin();
     }
 
     private void Destr()

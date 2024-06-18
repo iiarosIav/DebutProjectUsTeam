@@ -23,6 +23,10 @@ public class PlaneController : MonoBehaviour
     public GameObject LoseScreen;
     public TextMeshProUGUI HealText;
 
+    [SerializeField] private Transform _miniGame;
+    [SerializeField] private GameObject _miniGamePrefab;
+    [SerializeField] private Counter _counter;
+
     private float _timer;
 
 
@@ -45,9 +49,28 @@ public class PlaneController : MonoBehaviour
         if (_heal <= 0)
         {
             Instantiate(_fX, transform.position + new Vector3(0, 0.2f, 0), transform.rotation);
+            Time.timeScale = 0;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             LoseScreen.SetActive(true);
-            Destroy(gameObject);
         }
+    }
+
+    public void Restart()
+    {
+        LoseScreen.SetActive(false);
+        _heal = 5;
+        Time.timeScale = 1;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        HealText.text = _heal.ToString();
+        var miniGame = Instantiate(_miniGamePrefab, _miniGame.transform.position, 
+            _miniGame.transform.rotation).transform;
+        miniGame.SetParent(_miniGame.parent);
+        Destroy(_miniGame.gameObject);
+        _miniGame = miniGame;
+        
+        _counter.Restart();
     }
 
     private void Fire()
@@ -64,7 +87,14 @@ public class PlaneController : MonoBehaviour
             Instantiate(_fX, collision.gameObject.transform.position + new Vector3(0, 0.2f, 0), transform.rotation);
             _heal--;
             HealText.text = _heal.ToString();
-            Destroy(collision.gameObject);
+            if (collision.gameObject.GetComponent<EnemyPlaneAI>() is EnemyPlaneAI _enemy)
+            {
+                _enemy.Die();
+            }
+            else
+            {
+                Destroy(collision.gameObject);
+            }
         }
         if (collision.gameObject.name.Contains("laser") || collision.gameObject.name.Contains("Boss"))
         {

@@ -8,7 +8,14 @@ public class Gates : LinkedObject
 
     public override void Action()
     {
-        base.Action();
+        if (_miniGame != null)
+        {
+            _miniGame.SetActive(true);
+            _miniGame = null;
+            GameManager.Instance.LinObject = this;
+            _mainGame.SetActive(false);
+            return;
+        }
         _posY = transform.position.y;
         StartCoroutine(Opening());
     }

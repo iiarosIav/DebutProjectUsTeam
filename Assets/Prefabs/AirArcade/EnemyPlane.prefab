@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2097336076311115973}
   - component: {fileID: 8138298741979152005}
   - component: {fileID: 1410562505704027399}
+  - component: {fileID: 6449361300311872995}
   m_Layer: 0
   m_Name: EnemyPlane
   m_TagString: Untagged
@@ -51,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: -10
-  _shotPeriod: 5
+  _shotPeriod: 3
   _fX: {fileID: 1294198021987922, guid: 855cf521a2b934d4aaaa6ef87f8ab7a3, type: 3}
   _bullet: {fileID: 5128090988581265826, guid: 284bfaa3d810ceb4da56ece4300e6608, type: 3}
   _fXShot: {fileID: 1915067908122300, guid: 8e472f73ed772914bb60cb2c0fc40d43, type: 3}
@@ -79,6 +80,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5, y: 3.3168035, z: 2.633359}
   m_Center: {x: 0, y: 1.1584015, z: -0.8166795}
+--- !u!54 &6449361300311872995
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305647394378670476}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1370857105511123617
 GameObject:
   m_ObjectHideFlags: 0
